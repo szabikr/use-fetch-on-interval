@@ -1,21 +1,25 @@
-import * as React from 'react'
+import { useState, useEffect } from 'react'
 
-export const useMyHook = () => {
-  let [{
-    counter
-  }, setState] = React.useState({
-    counter: 0
-  })
+export default function useFetchOnInterval(fetchData, interval) {
+  const [ data, setData ] = useState({})
+  const [ error, setError ] = useState({})
+  const [ isLoading, setIsLoading ] = useState(false)
 
-  React.useEffect(() => {
-    let interval = window.setInterval(() => {
-      counter++
-      setState({counter})
-    }, 1000)
-    return () => {
-      window.clearInterval(interval)
+  useEffect(() => {
+    async function runFetch() {
+      setIsLoading(true)
+      try {
+        const result = await fetchData()
+        setData(result.data)
+      } catch (err) {
+        setError(err)
+      }
+      setIsLoading(false)
     }
+    runFetch()
+    const id = window.setInterval(runFetch, interval)
+    return () => window.clearInterval(id)
   }, [])
 
-  return counter
+  return { data, error, isLoading }
 }

@@ -1,11 +1,31 @@
 import React from 'react'
-import { useMyHook } from 'use-fetch-on-interval'
+import axios from 'axios'
+import useFetchOnInterval from 'use-fetch-on-interval'
+
+export async function fetchDataWithAxios() {
+  try {
+    return await axios.get('./data.json')
+  } catch (err) {
+    throw err
+  }
+}
+
+const oneSecond = 1000
+const interval = oneSecond
 
 const App = () => {
-  const example = useMyHook()
+  const { data, error, isLoading } = useFetchOnInterval(fetchDataWithAxios, interval)
   return (
     <div>
-      {example}
+      <p>
+        <code>DATA: {JSON.stringify(data)}</code>
+      </p>
+      <p>
+        <code>ERROR: {JSON.stringify(error)}</code>
+      </p>
+      <p>
+        <code>IS_LOADING: {JSON.stringify(isLoading)}</code>
+      </p>
     </div>
   )
 }

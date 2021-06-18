@@ -1,6 +1,6 @@
 {
   "name": "use-fetch-on-interval",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A hook that allows you to run fetch on interval",
   "author": "szabikr",
   "license": "MIT",

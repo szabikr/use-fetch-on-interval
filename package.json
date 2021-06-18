@@ -1,6 +1,6 @@
 {
   "name": "use-fetch-on-interval",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A hook that allows you to fetch data on interval",
   "author": "szabikr",
   "license": "MIT",

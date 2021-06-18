@@ -2,12 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import useFetchOnInterval from 'use-fetch-on-interval'
 
-export async function fetchDataWithAxios() {
-  try {
-    return await axios.get('./data.json')
-  } catch (err) {
-    throw err
-  }
+export function fetchDataWithAxios() {
+  return axios.get('./data.json')
 }
 
 const oneSecond = 1000
